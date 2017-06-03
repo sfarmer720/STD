@@ -11,12 +11,14 @@ public class UnitSelection : MonoBehaviour {
 	//Selection variables
 	public bool isSelected = false;
 
+    //defualt layers
+    
+
 	// Use this for initialization
 	public void InitSelection(Unit u) {
 
 		//set external classes
 		unit = u;
-
 	}
 
 
@@ -66,7 +68,7 @@ public class UnitSelection : MonoBehaviour {
 	*=================================================================================================================================== */
 
 	//Passive Selection
-	public void Selection(Transform t, Vector3 v){
+/*	public void Selection(Transform t, Vector3 v){
 
 		//TODO: functions for enemy, player unit, and movement
 
@@ -74,7 +76,7 @@ public class UnitSelection : MonoBehaviour {
 		unit.UnitToTile(t, v);
 
 	}
-		
+*/		
 
 
 
@@ -96,7 +98,8 @@ public class UnitSelection : MonoBehaviour {
 		//cycle all children, and set layers
 		foreach (Transform child in children) {
 
-			if (child.gameObject.layer != 28 && child.gameObject.layer != 13) {
+            //ignore layers
+			if (child.gameObject.layer != 28 && child.gameObject.layer != 8) {
 				child.gameObject.layer = layer;
 			}
 		}

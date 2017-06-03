@@ -14,6 +14,8 @@ public class Pathfinder{
 	 */
 
 
+
+
 	//Heuristic Variables
 	List<float[,]> heuristics = new List<float[,]>();
 	int[,] hKey;
@@ -35,6 +37,7 @@ public class Pathfinder{
 				hKey[y,x] = i;
 			}
 		}
+        
 	}
 
 	//Create Heuristic map

@@ -54,6 +54,14 @@ public class Player : Overlord {
 			}
 		}
 
+        //Active Player updates
+        if (activePlayer)
+        {
+            //Update GUI
+            GUIUpdate();
+
+        }
+
 	}
 
 
@@ -118,6 +126,37 @@ public class Player : Overlord {
 	}
 
 
+    /* ===================================================================================================================================
+	 * 
+	 * 										GUI Functions
+	 * 			 					Functions used to set and modify GUI
+	 *=================================================================================================================================== */
 
+    //Camp Control Updates
+    private void GUIUpdate()
+    {
+        //check if any units are selected
+        if (controls.select.IsUnitSelected())
+        {
+            //set to controls
+            guiCon.SetCampControls(1);
 
+            //check if unit is in group
+            if (controls.select.UnitInGroup(controls.select.GetUnit(controls.select.currentSelection)))
+            {
+                //group actions
+            }
+            else
+            {
+                //Set to individual unit controls
+                
+            }
+        }
+        else
+        {
+            //no units or groups selected, default camp controls, close unit controls
+            guiCon.SetCampControls(2);
+
+        }
+    }
 }

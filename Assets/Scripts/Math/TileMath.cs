@@ -167,37 +167,57 @@ public class TileMath{
 			return new Vector3();
 	}
 		
-	//Generate matrix of tile neighbors
-	public Vector3[,] GetNeighbors(int[,] map, Vector2 loc){
+	//Generate List of tile neighbors
+    public List<Vector2> GetNeighbors(int[,] map, Vector2 loc)
+    {
+        //initialize return list
+        List<Vector2> ret = new List<Vector2>();
 
-		//initialize return matrix
-		Vector3[,] ret = new Vector3[3, 3];
+        //generate cycle parameters
+        Vector2 vy = CycleParams((int)loc.y);
+        Vector2 vx = CycleParams((int)loc.x);
 
-		//cycle neighbors
-		for (int y = -1; y < 2; ++y) {
-			for (int x = -1; x < 2; ++x) {
+        //cycle
+        for(int y = (int)vy.x; y < vy.y; ++y)
+        {
+            for (int x = (int)vx.x; x < vx.y; ++x)
+            {
+                //create and add neighbor vector
+                Vector2 v = new Vector2(loc.x + x, loc.y + y);
 
-				//get new coordinates
-				int nx = (int)(loc.x + x);
-				int ny = (int)(loc.y + y);
-				Vector3 v = new Vector3 (-1, -1, -1);
+                //confirm vector is in bounds
+                if(v.x >=0 && v.x < map.GetLength(0) && v.y >= 0 && v.y < map.GetLength(1) && v != loc)
+                {
+                    ret.Add(v);
+                }
+            }
+        }
 
-				//check if neighbor is within map bounds
-				if (nx >= 0 && ny >= 0 && nx < map.GetLength (1) && ny < map.GetLength (0)) {
+        //return list
+        return ret;
+    }
 
-					//within bounds set neighbor location and type
-					v = new Vector3 (nx, ny, map [ny, nx]);
+    //tile neighbor cycle parameters
+    private Vector2 CycleParams(int i)
+    {
+        //initialize return vector
+        Vector2 v = new Vector2(-1, 2);
 
-				}
+        //check if edge param
+        if(i % 10 == 0)
+        {
+            //zeroth edge, increase min
+            v.x = 0;
+        }else if ((i + 1) % 10 == 0)
+        {
+            //max edge, reduce max
+            v.y = 1;
+        }
 
-				//set vector in array
-				ret [y + 1, x + 1] = v;
-			}
-		}
-
-		//return new array
-		return ret;
-	}
+        //return vector
+        return v;
+    }
+    
 
 
 	//Gernerate matrix of vertices

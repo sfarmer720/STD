@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.6.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -94,39 +96,52 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Materials\prohelp.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\CameraControls.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\GUIDriver.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\Inputer.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\Menu Drivers\LowLevelDriver.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\Menu Drivers\MenuControl.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\Menu Drivers\MenuDriver.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\Menu Drivers\MidLevelDriver.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\Menu Drivers\ShieldDriver.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\Menu Drivers\TopLevelDriver.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\Menu\InfoPanel.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\Menu\LowPanel.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\Menu\Menu.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\Menu\MidPanel.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\Menu\TopPanel.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\MouseFunctions.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\PanZoom.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\QuickKeys.cs" />
-    <Compile Include="Assets\Scripts\Control and Input\SelectionScript.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\GUI\UnitMenu.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\Inputs\CameraControls.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\GUI\CampControl.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\Inputs\Controls.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\Inputs\PC\CompControls.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\Inputs\PC\KeyboardInput.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\Inputs\PC\MouseInput.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\Inputs\Selector.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\Units\FormationDriver.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\GUI\GUIDriver.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\GUI\MiniMapControl.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\Inputs\Mouse\MouseFunctions.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\Inputs\PanZoom.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\Inputs\Mouse\QuickKeys.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\Inputs\SelectionScript.cs" />
+    <Compile Include="Assets\Scripts\Control and Input\Units\UnitControl.cs" />
     <Compile Include="Assets\Scripts\Game\AntiPlayer\AIDefense.cs" />
+    <Compile Include="Assets\Scripts\Game\AntiPlayer\AIForebrain.cs" />
     <Compile Include="Assets\Scripts\Game\AntiPlayer\Antiplayer.cs" />
-    <Compile Include="Assets\Scripts\Game\Overlord.cs" />
+    <Compile Include="Assets\Scripts\Game\Overlord\Overlord.cs" />
+    <Compile Include="Assets\Scripts\Game\Overlord\OverlordUpgrade.cs" />
     <Compile Include="Assets\Scripts\Game\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Game\Post Processing\Scripts\FOW.cs" />
     <Compile Include="Assets\Scripts\Game\Post Processing\Scripts\Outline.cs" />
     <Compile Include="Assets\Scripts\Game\Tile\Assets.cs" />
     <Compile Include="Assets\Scripts\Game\Tile\Tile.cs" />
-    <Compile Include="Assets\Scripts\Game\Unit\Scout.cs" />
-    <Compile Include="Assets\Scripts\Game\Unit\ScoutUpgrades.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\Camp\Camp.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\Camp\CampUpgrade.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\IndividualUnitAssets.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\Infantry\Infantry.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\Infantry\InfantryUpgrade.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\Keep\Keep.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\Keep\KeepUpgrade.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\MoveWith.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\Scout\Scout.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\Scout\ScoutUpgrade.cs" />
     <Compile Include="Assets\Scripts\Game\Unit\Unit.cs" />
-    <Compile Include="Assets\Scripts\Game\Unit\UnitMenu.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\UnitAssets.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\UnitBodyTrigger.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\UnitCombat.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\UnitFormation.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\UnitHealing.cs" />
     <Compile Include="Assets\Scripts\Game\Unit\UnitMovement.cs" />
     <Compile Include="Assets\Scripts\Game\Unit\UnitSelection.cs" />
-    <Compile Include="Assets\Scripts\Game\Upgrades.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\UnitSight.cs" />
+    <Compile Include="Assets\Scripts\Game\Unit\Upgrade.cs" />
     <Compile Include="Assets\Scripts\Generation\BiomeRules.cs" />
     <Compile Include="Assets\Scripts\Generation\CreateGeometry.cs" />
     <Compile Include="Assets\Scripts\Generation\CreatePlanes.cs" />
@@ -243,6 +258,7 @@
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
 </Project>

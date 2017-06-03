@@ -77,8 +77,38 @@ public class OverlordMath {
 		return ret;
 	}
 
+    //Check if a Unit or upgrade can be bought
+    public bool CanAfford(Overlord o, int cost)
+    {
+        return (o.gold >= cost);
+    }
 
+    //Check if a unit can be built
+    public Vector2 CanBuildUnit(Generator map, Vector2 loc)
+    {
+        //get tile list
+        List<GameObject> tileNieghbors = map.GetTile(loc).GetComponent<Tile>().neighbors;
 
+        //cycle tiles and check if occupied
+        for(int i = 0; i < tileNieghbors.Count; ++i)
+        {
+            //get tile
+            Tile t = tileNieghbors[i].GetComponent<Tile>();
 
+            //check if tile is unoccupied
+            if (!t.occupied)
+            {
+                return t.MapLoc;
+            }
+        }
 
+        //unit cannot be built, return false vector
+        return new Vector2(-1, -1);
+    }
+
+    //Spawn Unit location
+    public Vector3 SpawnLocation(Vector2 loc, int mapSize)
+    {
+        return new Vector3(loc.x * mapSize, 0, loc.y * mapSize);
+    }
 }

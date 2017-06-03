@@ -44,15 +44,26 @@ public class Tile : MonoBehaviour {
 	//Mesh Variables
 	private MeshRenderer mr;
 	private MeshFilter mf;
-
-
 	private float[,] tileNoise;
+
+
+    //Unit variables
+    public bool occupied = false;
+    public bool isBeingHealed = false;
+    public List<Unit> healedBy = new List<Unit>();
 
 
 	//Fixed Update
 	void FixedUpdate(){
-		
+
+        //set to false, will reset if triggered again
+        occupied = false;
+
+        //set tiel visiblity
 		TileVisiblity();
+
+        //check if tile is still being healed
+        CheckHeals();
 
 	}
 
@@ -100,22 +111,15 @@ public class Tile : MonoBehaviour {
 	//Set neighbor tiles
 	public void SetNeighbors(Generator map){
 
-		//cycle map location
-		for (int y = -1; y < 2; ++y) {
-			for (int x = -1; x < 2; ++x) {
+        //get lsit of neighbors
+        List<Vector2> neighborsV2 = stdMath.GetNeighbors(map.GetMap(), MapLoc);
 
-				int nx = (int)MapLoc.x + x;
-				int ny = (int)MapLoc.y + y;
-
-
-
-				//excludions
-				if (ny < map.mapSize && ny >= 0 && nx >= 0 && nx < map.mapSize && !(x == 0 && y == 0)) {
-					
-					neighbors.Add (map.GetTile (nx, ny));
-				}
-			}
-		}
+        //cycle list
+        for(int i = 0; i < neighborsV2.Count; ++i)
+        {
+            //Add neighbor game object
+            neighbors.Add(map.GetTile(neighborsV2[i]));
+        }
 
 		//check if neighbor types all match
 		for (int i = 0; i < neighbors.Count; ++i) {
@@ -270,25 +274,7 @@ public class Tile : MonoBehaviour {
 		visible = true;
 		visited = true;
 	}
-
-
-	//Update Units Map Location
-	void OnTriggerEnter(Collider other){
-
-		//check if collideded with a unit
-		if (other.gameObject.transform.parent.gameObject.layer == 11) {
-
-			GameObject unit = other.gameObject.transform.parent.gameObject;
-
-			//Check if body trigger
-			if (other.gameObject.name == "Body Trigger") {
-
-				//update units map location
-				unit.GetComponent<Unit>().SetTileFromTrigger(MapLoc, this);
-				Debug.Log (unit.name + " moved to " + this.gameObject.name);
-			}
-		}
-	}
+    
 
 	//update units sight
 	void OnTriggerStay(Collider other){
@@ -296,30 +282,27 @@ public class Tile : MonoBehaviour {
 		//check if collideded with a unit
 		if (other.gameObject.transform.parent.gameObject.layer == 11) {
 
-			GameObject unit = other.gameObject.transform.parent.gameObject;
-
 			//Check if sight trigger
 			if (other.gameObject.name == "Sight Sphere") {
 
-				SetToVisible ();
-
-			}
-		}
+               UnitSight us = other.gameObject.transform.parent.gameObject.GetComponent<UnitSight>();
+                us.AddToSeen(this.gameObject);
+            }
+        }
 	}
 
 	void OnTriggerExit(Collider other){
 		//check if collideded with a unit
 		if (other.gameObject.transform.parent.gameObject.layer == 11) {
 
-			GameObject unit = other.gameObject.transform.parent.gameObject;
-
 			//Check if sight trigger
 			if (other.gameObject.name == "Sight Sphere") {
 
-				SetToVisited ();
+                UnitSight us = other.gameObject.transform.parent.gameObject.GetComponent<UnitSight>();
+                us.AddToLost(this.gameObject);
 
-			}
-		}
+            }
+        }
 	}
 
 
@@ -332,7 +315,7 @@ public class Tile : MonoBehaviour {
 		go.transform.parent = this.gameObject.transform;
 		go.name = this.gameObject.name + " Trigger";
 		go.layer = 2;
-
+        
 		//Create box collider
 		tileBounds = go.AddComponent<BoxCollider> ();
 		tileBounds.center = this.gameObject.transform.position;
@@ -344,9 +327,9 @@ public class Tile : MonoBehaviour {
 		tileBody.useGravity = false;
 		tileBody.freezeRotation = true;
 		tileBody.isKinematic = true;
-
-
+        
 	}
+
 		
 	//Set tile layers
 	public void SetTileLayer(int layer){
@@ -367,5 +350,67 @@ public class Tile : MonoBehaviour {
 		this.gameObject.layer = layer;
 	}
 
+    /* ===================================================================================================================================
+   * 
+   * 									Unit based function
+   * 			 			Functions effected by units interaction with tile
+   *=================================================================================================================================== */
 
+    //Add a healer to tile
+    public void AddHealer(Unit u)
+    {
+        //set tile to being healed
+        if (!isBeingHealed) { isBeingHealed = true; }
+
+        //add healer to healer list
+        healedBy.Add(u);
+    }
+
+    //remove a healer
+    public void RemoveHealer(Unit u)
+    {
+        //check if healer is affectign tile
+        if (healedBy.Contains(u))
+        {
+            //remove healer
+            healedBy.RemoveAt(healedBy.IndexOf(u));
+        }
+
+        //Stop healing tile if no more healers
+        isBeingHealed = (healedBy.Count >= 1);
+    }
+
+
+    //Check if still healing
+    public void CheckHeals()
+    {
+        //check if tile is being healed
+        if (isBeingHealed)
+        {
+            //create array of healers to remove
+            List<int> toRemove = new List<int>();
+
+            //cycle healers
+            for(int i = 0; i < healedBy.Count; ++i)
+            {
+                //check if unit still healing tile
+                if(!(healedBy[i].Healing().isHealing && healedBy[i].Healing().tilesToHeal.Contains(this)))
+                {
+                    //unit is either no longer healing or no longer has this tile in sight, mark for removal
+                    toRemove.Add(i);
+                }
+            }
+
+            //cycle removal list
+            for(int i = 0; i < toRemove.Count; ++i)
+            {
+                //remove healer
+                healedBy.RemoveAt(i);
+            }
+
+            //Stop healing tile if no more healers
+            isBeingHealed = (healedBy.Count >= 1);
+
+        }
+    }
 }

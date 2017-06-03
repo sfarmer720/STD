@@ -4,20 +4,33 @@ using UnityEngine;
 
 public class UnitMovement : MonoBehaviour {
 
-	//External Classes
+    /*
+     * Move functions
+     * Used to control units placement in the world.
+     * Individual units move within a tile only, world movement is controled by the master game object.
+     * 
+     */
+
+
+    //External Classes
+    private UnitFormation unitFormation;
+    private UnitAssets assets;
 	private Generator mainMap;
 	private STDMath stdMath;
 	private int[,] tileMap;
 	private Tile currTile;
-	private CharacterController con;
+    private CharacterController mainCon;
 
 	//Stat Variables
 	private float baseSpeed;
 	private float[] moveCosts;
 	private Vector2 mapLoc;
 
-	//Movement Variables
+    //Movement Variables
+    private float startTime;
+    private List<Vector3> movePositions = new List<Vector3>();
 	private Vector3 curPos;
+    private Vector3 initPos;
 	private Vector3 finPos; 
 	private List<Vector2> movePath = new List<Vector2> ();
 	private List<Vector3> moveNodes = new List<Vector3> ();
@@ -25,26 +38,30 @@ public class UnitMovement : MonoBehaviour {
 
 	//Path variables
 	private LineRenderer pathRenderer;
+    
+ 
 
-	/* ===================================================================================================================================
+    /* ===================================================================================================================================
 	 * 
 	 * 									Core Functions
 	 * 			 				Functions used to initialize and get updates
 	 *=================================================================================================================================== */
 
 
-	// Use this for initialization
-	public void InitMovement(
-		Generator mainmap, CharacterController co,
-		float speed, float[] costs, Vector2 loc
+    // Use this for initialization
+    public void InitMovement(
+		Generator mainmap, UnitAssets ass,
+		float speed, float[] costs, Vector2 loc,
+        CharacterController mainController
 	){
 
 		//initialize external classes
-		con = co;
+        assets = ass;
 		mainMap = mainmap;
 		tileMap = mainMap.GetMap ();
 		stdMath = mainMap.stdMath;
 		currTile = mainMap.GetTile (loc).GetComponent<Tile> ();
+        mainCon = mainController;
 		Random.InitState (stdMath.seed);
 
 		//Initialize base stats
@@ -55,6 +72,10 @@ public class UnitMovement : MonoBehaviour {
 		curPos = this.gameObject.transform.position;
 		mapLoc = loc;
 
+        //Initialize Formation
+      //  unitFormation = this.gameObject.AddComponent<UnitFormation>();
+       // unitFormation.Init(stdMath);
+        
 
 		//initilaize path renderer
 		pathRenderer = new GameObject().AddComponent<LineRenderer>();
@@ -80,53 +101,71 @@ public class UnitMovement : MonoBehaviour {
 			Move ();
 		}
 
-		//constantly apply gravity
-		con.SimpleMove(stdMath.ApplyGravity(new Vector3()));
+        //Check unit is in formation
+       // unitFormation.CheckFormation(Speed());
+
+        //constantly apply gravity to each unit
+        ApplyGravity();
 
 		//update path renderer
 		UpdatePathRender();
 
 	}
 
+     //Apply Gracity to all units and set forwards
+     private void ApplyGravity()
+    {
+        for(int i = 0; i < assets.unitInfo.Length; ++i)
+        {
+            if (assets.unitInfo[i].con != null)
+            {
+                assets.unitInfo[i].con.SimpleMove(stdMath.ApplyGravity(new Vector3()));
+            }
+        }
+
+        mainCon.SimpleMove(stdMath.ApplyGravity(new Vector3()));
+    }
+
 	//Main Movement function
 	private void Move(){
 
-		//Check if current position equals final position
-		if (!PosReached(finPos)) {
+        //Check for move nodes, and if current position is final position
+        if (moveNodes.Count > 0 && !PosReached(moveNodes[moveNodes.Count - 1]))
+        {
+            
+            //check if next node has been reached
+            if (PosReached(moveNodes[0]))
+            {
 
-			//Not at final position, movement still needed. Check if reached current node
-			if (PosReached(moveNodes[0])) {
+                Debug.Log("Unit has reached node " + moveNodes[0]);
 
-				//remove current node
-				moveNodes.RemoveAt (0);
+                //Set init position and remove node
+                initPos = moveNodes[0];
+                moveNodes.RemoveAt(0);
 
-				//update path renderer
-				UpdateNodes(moveNodes);
-			} 
+                //update path renderer
+                UpdateNodes(moveNodes);
 
-			//Set Look at towards next position, account for unit hieght
+                //Start new timer
+                startTime = Time.time;
 
-			//this.gameObject.transform.rotation = Quaternion.LookRotation (moveNodes [0] - curPos);
+                Debug.Log("Moving to new node");
+            }
+            
+            //Set lookat and move
+            Vector3 v = moveNodes[0];
+            v.y = this.gameObject.transform.position.y;
+            this.gameObject.transform.LookAt(v);
 
-			Vector3 v = moveNodes[0];
-			v.y = curPos.y;
-			this.gameObject.transform.LookAt (v);
-			//Debug.Log ("Looking towards " + moveNodes[0] +" with a look rotaion of "+Quaternion.LookRotation (moveNodes [0] - curPos));
+            mainCon.Move(this.gameObject.transform.forward * Speed() * Time.smoothDeltaTime);
+        }
+        else{
+            Debug.Log("Unit Reached End");
 
-			//Move towards next position
-			con.Move(stdMath.MoveVec(this.gameObject.transform.forward, Speed()));
+            //Reached end, reset
+            StopMovement();
 
-		} else {
-
-			Debug.Log ("Unit Reached End");
-
-			//at final position, end movement
-			isMoving = false;
-			movePath.Clear ();
-			moveNodes.Clear ();
-		}
-
-
+        }
 	}
 
 
@@ -155,16 +194,90 @@ public class UnitMovement : MonoBehaviour {
 
 			//set pathrenderer
 			SetPathRenderer(moveNodes);
-
+            Debug.Log(moveNodes.Count);
 			Move ();
 		}
-
 	}
+    public void MoveTo(Transform t)
+    {
+        //confirm unit can or should move
+        if (Speed() > 0)
+        {
+
+            Debug.Log("Unit is starting at " + this.gameObject.transform.position);
+
+            //convert transform selection to path
+            moveNodes.Clear();
+            movePath = stdMath.SelectToPath(t, mapLoc, tileMap, moveCosts, false);
+
+            //Set is moving and remove starting position
+            isMoving = true;
+            movePath.RemoveAt(0);
+
+            //Create Node list from path list
+            for (int i = 0; i < movePath.Count; ++i)
+            {
+                moveNodes.Add(GetNewTile(movePath[i]).TileLoc);
+            }
+
+            //set pathrenderer
+            SetPathRenderer(moveNodes);
+
+            //set initial move positions
+            //SetMovePostions();
+
+            //Set init position and move units
+            initPos = this.gameObject.transform.position;
+            startTime = Time.time;
+            Move();
+        }
+    }
+
+    //Set Move positions for LERP and LOOKAT
+    private void SetMovePostions()
+    {
+        //check number of remaining nodes
+        if(moveNodes.Count > 0)
+        {
+            //Add lerp origin, destination, and set look at target to destination
+            movePositions.Add(moveNodes[0]);
+            movePositions.Add(moveNodes[1]);
+            movePositions.Add(moveNodes[1]);
+
+            //check for look at target
+            if (moveNodes.Count > 1)
+            {
+                //Change look at target to next tile
+                movePositions[2] = moveNodes[2];
+            }
+        }
+
+        //set move start time
+        startTime = Time.time;
+    }
+
+    //shift path renderer down one
+    private void UpdateNodes(List<Vector3> nodes)
+    {
+
+        pathRenderer.positionCount = 1;
+        pathRenderer.positionCount = nodes.Count + 1;
+        pathRenderer.SetPosition(0, this.gameObject.transform.position);
+
+        //cycle nodes list
+        for (int i = 0; i < nodes.Count; ++i)
+        {
+
+            //set position to node position
+            Vector3 v = nodes[i];
+            v.y = GetNewTile(movePath[i]).highestY * 1.1f;
+            pathRenderer.SetPosition(i + 1, v);
+        }
+    }
 
 
-
-	//update visible path
-	private void UpdatePathRender(){
+    //update visible path
+    private void UpdatePathRender(){
 
 		//check if moving
 		if (isMoving) {
@@ -192,33 +305,28 @@ public class UnitMovement : MonoBehaviour {
 		UpdateNodes (nodes);
 	}
 
-	//shift path renderer down one
-	private void UpdateNodes(List<Vector3> nodes){
+	
+    
 
-		pathRenderer.positionCount = 1;
-		pathRenderer.positionCount = nodes.Count + 1;
-		pathRenderer.SetPosition(0,this.gameObject.transform.position);
-
-		//cycle nodes list
-		for (int i = 0; i < nodes.Count; ++i) {
-
-			//set position to node position
-			Vector3 v = nodes[i];
-			v.y = GetNewTile (movePath [i]).highestY * 1.1f;
-			pathRenderer.SetPosition(i+1,v);
-		}
-	}
-
-	/* ===================================================================================================================================
+    /* ===================================================================================================================================
 	 * 
 	 * 									Getters / Setters
 	 * 			 				Used to get modified stats
 	 *=================================================================================================================================== */
 
-	//Is unit moving
-	public bool IsMoving(){
+    //Is unit moving
+    public bool IsMoving(){
 		return isMoving;
 	}
+
+    //reset Movement
+    public void StopMovement()
+    {
+        isMoving = false;
+        movePositions.Clear();
+        movePath.Clear();
+        moveNodes.Clear();
+    }
 	//GET CURRENT TILE LOCATION
 	public Vector2 CurrentTile(){
 		return mapLoc;
@@ -226,17 +334,25 @@ public class UnitMovement : MonoBehaviour {
 
 	//SET MAP LOCATION FROM TILE//
 	public void SetNewTileLocation(Vector2 loc, Tile t){
-		mapLoc = loc;
-		currTile = t;
 
-		//check if unit is moving
-		if (isMoving && movePath.Count > 0) {
+        //check if location is different
+        if (loc != mapLoc)
+        {
+            //set new location
+            mapLoc = loc;
+            currTile = t;
 
-			//Remove previous tile from path
-			movePath.RemoveAt (0);
+            //check if unit is moving
+            if (isMoving && movePath.Count > 0)
+            {
 
-		}
+                //Remove previous tile from path
+               // movePath.RemoveAt(0);
+
+            }
+        }
 	}
+
 
 	//GET MODIFIED SPEED//
 	public float Speed(){
@@ -261,6 +377,16 @@ public class UnitMovement : MonoBehaviour {
 		return fa [GetCurrentTile ().tileType];
 	}
 
+    //SET UNIT FORMATION//
+    public void SetUnitFormation(bool[,] form, int i)
+    {
+        unitFormation.SetFormation(form, i);
+    }
+    //GET UNIT FORMATION//
+    public bool[,] GetUnitFormation(int i)
+    {
+        return unitFormation.GetFormation(i);
+    }
 
 
 	//Get New Tile
@@ -280,6 +406,5 @@ public class UnitMovement : MonoBehaviour {
 	private Tile TileFromTrigger(Collider c){
 		return c.gameObject.transform.parent.gameObject.GetComponent<Tile> ();
 	}
-
 
 }

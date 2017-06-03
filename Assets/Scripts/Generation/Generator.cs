@@ -13,6 +13,8 @@ public class Generator : MonoBehaviour {
 	public BiomeRules biomeRules;
 	public GenerateNoise generateNoise;
 	public Assets assetHolder;
+
+    public Controls controls;
 	public SelectionScript selector;
 	public QuickKeys quickKeys;
 
@@ -129,35 +131,7 @@ public class Generator : MonoBehaviour {
 
 		}
 	}
-
-
-
-
-
-	public void SetUnit(){
-		GameObject unit = Instantiate (assetHolder.offenseAssets [0]);
-		unit.transform.position = new Vector3 (0, unit.transform.lossyScale.y, 0);
-		//Unit u = unit.AddComponent (typeof(Unit)) as Unit;
-		Unit u = unit.GetComponent<Unit>();
-		//unit.layer = 11;
-
-		float[] mvcost = { 1, 1, 2, 2, 4, 3, 4, 5 };
-
-		u.InitUnit(
-			this,
-			new Vector2(0,0),
-			7, mvcost
-		);
-
-
-	//	GameObject vis = stdMath.SightPlane (7, assetHolder.Sight);
-
-	//	vis.transform.parent = unit.transform;
-	//	vis.transform.localScale = new Vector3 (2, 2, 2);
-	//	vis.transform.position = new Vector3 (-vis.GetComponent<MeshRenderer>().bounds.size.x *0.5f,3,-vis.GetComponent<MeshRenderer>().bounds.size.z *0.5f);
-	//	vis.layer = 12;
-
-	}
+    
 
 
 
@@ -474,10 +448,10 @@ public class Generator : MonoBehaviour {
 	//		stdMath, this, assetHolder
 	//	);
 	}
+    
 
 
-
-	/* ===================================================================================================================================
+    /* ===================================================================================================================================
 	 * 
 	 * 									Create and Set Cameras
 	 * 			 			Used to set and create both main and processing cameras
@@ -485,7 +459,7 @@ public class Generator : MonoBehaviour {
 
 
 
-	private void SetCam(){
+    private void SetCam(){
 
 		//set map corners
 		this.gameObject.GetComponentInChildren<CameraControls>().SetCorners(
@@ -509,6 +483,12 @@ public class Generator : MonoBehaviour {
 	 * 			 			Used to pull variables from variaous scripts
 	 *=================================================================================================================================== */
 
+    //Get Externals
+    public Controls GetControls(){
+        return controls;
+    }
+
+
 	//Get reference tile
 	public int[,] GetMap(){
 		return map;
@@ -529,6 +509,19 @@ public class Generator : MonoBehaviour {
 		int i = (player.onDefense) ? player.gameState : antiplayer.gameState;
 		return i;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	void DevTools(){

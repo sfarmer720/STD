@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Assets : MonoBehaviour {
@@ -29,7 +30,7 @@ public class Assets : MonoBehaviour {
 	public Material Sight;
 	public Color[] terraColors;
 
-	/*
+    /*
 	 * 0, 153, 0, 255		- Grass
 	 * 231, 210, 156, 255	- Desert
 	 * 8, 6, 6, 255			- Swamp
@@ -37,16 +38,22 @@ public class Assets : MonoBehaviour {
 	 * 26, 110, 152, 255	- River
 	 * 131, 106, 68, 255	- Mountain
 	 * 3, 0, 73, 255		- Sea
-	 */ 
+	 */
 
 
-	//UPGRADE ASSETS//
-	public GameObject upgradeObject;
-	public Upgrades[] offenseUpgrades;
-	public Upgrades[] defenseUpgrades;
+    //Camp Control Icon Assets//
+    public Image[] CC_Hire_Offense;
+    public Image[] CC_Hire_Defense;
+    public Image[] CC_Special_Offense;
+    public Image[] CC_Special_Defense;
+    public Image[] CC_Control_Icons;
 
-	//Pull assets
-	public GameObject[] GetAssets(int first, int last, int assetType){
+    //Unit Icon images
+    public Image[] MobileUnitIcons;
+    public Image[] BuildingUnitIcons;
+
+    //Pull assets
+    public GameObject[] GetAssets(int first, int last, int assetType){
 
 		//establish new array
 		GameObject[] a = new GameObject[0];
@@ -99,10 +106,27 @@ public class Assets : MonoBehaviour {
 		}
 		return ret;
 	}
+    
 
+    //GUI ASSETS//
+    //Camp control images
+    public Image CampControlImage(int i, int type, bool onDefense)
+    {
+        switch (type)
+        {
+            case 0: return (onDefense) ? CC_Hire_Defense[i] : CC_Hire_Offense[i];
+            case 1: return (onDefense) ? CC_Special_Defense[i] : CC_Special_Offense[i];
+            case 2: return CC_Control_Icons[i];
+        }
 
-	//Pull Upgrade Assets//
-	public Upgrades[] GetUpgradeAssets(bool defense){
-		return (defense) ? defenseUpgrades : offenseUpgrades;
-	}
+        //no image found
+        return null;
+    }
+
+    //Unit icons
+    public Image UnitIcons(int i, bool MobileUnit)
+    {
+        return (MobileUnit) ? MobileUnitIcons[i] : BuildingUnitIcons[i];
+    }
+
 }

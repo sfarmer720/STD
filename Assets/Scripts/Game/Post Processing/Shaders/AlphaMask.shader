@@ -50,7 +50,8 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 
-			fixed4 tex1 = tex2D(_MainTex, float2(i.uv.x, 1-i.uv.y));
+			//fixed4 tex1 = tex2D(_MainTex, float2(i.uv.x, 1-i.uv.y));
+			fixed4 tex1 = tex2D(_MainTex, i.uv);
 			fixed4 tex2 = tex2D(_AddTex, i.uv);
 
 			//return tex2D(_AddTex, i.uv);

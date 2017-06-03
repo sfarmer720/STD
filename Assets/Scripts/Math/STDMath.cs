@@ -22,6 +22,9 @@ public class STDMath : MonoBehaviour{
 	private OverlordMath overMath = new OverlordMath();
 	private AntiplayerMath antiMath = new AntiplayerMath ();
 
+    //Constant Variables
+    public int MAXSPEED = 20;
+
 
 	// Initialization
 	void Start () {
@@ -42,7 +45,7 @@ public class STDMath : MonoBehaviour{
 	}
 
 	//Update time
-	void Update(){
+	void FixedUpdate(){
 
 		//Update Time to be used throughout game
 		time = Time.smoothDeltaTime;
@@ -135,9 +138,9 @@ public class STDMath : MonoBehaviour{
 	}
 
 	//NEIGHBOR MATRIX//
-	public Vector3[,] GetNeighborMat(int[,] map, Vector2 loc){
-		return tileMath.GetNeighbors (map, loc);
-	}
+	public List<Vector2> GetNeighbors(int[,] map, Vector2 loc){
+        return tileMath.GetNeighbors(map, loc);
+    }
 
 	//VECTOR MATRIX//
 	public Vector3[,] VectorMatrix(Vector3[] verts){
@@ -170,7 +173,29 @@ public class STDMath : MonoBehaviour{
 		return pathfinder.Pathfind (start, unitMath.TransformToMap (t), tileMap, costs, diagnolAllowed);
 	}
 
-	//MOVEMENT VECTOR//
+    //MOVEMENT LERP//
+    public float MoveLERP(Vector3 init, Vector3 dest, float speed, float start)
+    {
+        return unitMath.MoveLERP(init, dest, speed, start);
+        //return unitMath.MoveLERP(movePos, speed, start);
+    }
+
+    //MOVEMENT ROTATION//
+    public Quaternion MoveLook(Transform t, Vector3 target)
+    {
+        return unitMath.MoveLook(t, target);
+    }
+
+    //MOVEMENT POSITION//
+    public Vector3 MovePos(List<Vector3> movePos, float f)
+    {
+        return unitMath.MovePos(movePos, f);
+    }
+
+    //MOVEMENT VECTOR//
+    public Vector3 MoveVec(Vector3 initPos, Vector3 dstPos, float speed, float startTime){
+        return unitMath.MoveVec(initPos, dstPos, speed, startTime, time);
+    }
 	public Vector3 MoveVec( Vector3 forward, float speed){
 		return unitMath.MoveDir (forward, speed, time);
 	}
@@ -185,15 +210,70 @@ public class STDMath : MonoBehaviour{
 		return unitMath.MovementOverTileSpeed (speed, cost);
 	}
 
+    //UPDATE HP//
+    public int UpdateHP(int currentHP, int currentMax, int newMax){
+        return unitMath.UpdateHP(currentHP, currentMax, newMax);
+    }
 
-	/* ===================================================================================================================================
-	 * 
-	 * 									Overlord Math
-	 *  					Math functions for Player and AI base class
-	 *=================================================================================================================================== */
+    //IN RANGE//
+    public bool UnitInRange(Vector3 v1, Vector2 v2, int range, int tileSize){
+        return unitMath.InRange(v1, v2, range, tileSize);
+    }
 
-	//DEFENSE DOMAIN//
-	public bool[,] EstablishDomain(Vector2 location, Generator map){
+    //ATTACKS PER SECOND//
+    public float AttacksPerSecond(float Speed){
+        return unitMath.AttacksPerSecond(Speed, MAXSPEED);
+    }
+
+    //ATTACK POWER//
+    public float AttackPower(int numUnits, float attack){
+        return unitMath.AttackPower(numUnits, attack);
+    }
+
+    //STRUCTURE FLAW//
+    public float StructureFlaw(float structureFlaw){
+        return unitMath.StructureFlaw(structureFlaw);
+    }
+
+    //KEEP DAMAGE//
+    public int KeepDamage(Unit u, Unit e){
+        return unitMath.KeepDamage(u, e);
+    }
+    //BUILDING DAMAGE//
+    public int BuildingDamage(Unit u, Unit e){
+        return unitMath.BuildingDamage(u, e);
+    }
+    //UNIT DAMAGE//
+    public int UnitDamage(Unit u, Unit e){
+        return unitMath.UnitDamage(u, e);
+    }
+    //TRAP DAMAGE//
+    public int TrapDamage(Unit u, Unit e){
+        return unitMath.TrapDamage(u, e);
+    }
+
+        /* ===================================================================================================================================
+         * 
+         * 									Overlord Math
+         *  					Math functions for Player and AI base class
+         *=================================================================================================================================== */
+        //CAN AFFORD//
+    public bool CanAfford(Overlord o, int cost) {
+        return overMath.CanAfford(o, cost);
+    }
+
+    //CAN BUILD UNIT//
+    public Vector2 CanBuildUnit(Generator map, Vector2 loc){
+        return overMath.CanBuildUnit(map, loc);
+    }
+
+    //UNIT SPAWN LOCATION//
+    public Vector3 SpawnLocation(Vector2 loc, int mapSize){
+        return overMath.SpawnLocation(loc, mapSize);
+    }
+
+    //DEFENSE DOMAIN//
+    public bool[,] EstablishDomain(Vector2 location, Generator map){
 		return overMath.SetDefenseDomain (location, map);
 	}
 

@@ -13,8 +13,15 @@ public class Antiplayer : Overlord {
 	//Shorthands
 	public enum AIDifficulty {	Caboose, Grif, Tucker, Church, Washington, Tex, Carolina, Epsilon, Alpha	};
 
-	//Critical Variables
-	public int offenseRatio;
+    //AI personality Variables
+    public float STR; // A measure of aggresivness. 0: No Agro. 1: Full Agro
+    public float DEX; // A measure of flexibilty in strategy. 0: Single strat only. 1: Random/No Strat
+    public float WIS; // Depth of AI memory. 0: no memory. 1: Infinite memeory
+    public float INT; // Number of Actions/sec
+    public float CON; // Potential for error
+
+    //Critical Variables
+    public int offenseRatio;
 	public int defenseRatio;
 	public int[] tileMod;
 
@@ -30,8 +37,19 @@ public class Antiplayer : Overlord {
 
 	public void InitializeAI(){
 
-		//Set Offense and Defense ratios
-		defenseRatio = (onDefense)? Random.Range(5,10) : -1;
+        //initialize random personality
+        STR = Random.Range(0.0f, 1.0f);
+        DEX = Random.Range(0.0f, 1.0f);
+        WIS = Random.Range(0.0f, 1.0f);
+        INT = Random.Range(0.0f, 1.0f);
+        CON = Random.Range(0.0f, 1.0f);
+
+
+
+
+
+        //Set Offense and Defense ratios
+        defenseRatio = (onDefense)? Random.Range(5,10) : -1;
 		offenseRatio = (onDefense) ? -1 : Random.Range (5, 10);
 
 		if (defenseRatio > 0) {

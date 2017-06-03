@@ -23,10 +23,60 @@ public class UnitMath{
 		}
 	}
 
+    //Get current movement LERP amount
+    public float MoveLERP(List<Vector3> movePos, float speed, float start)
+    {
+       // Debug.Log("Time: " + (Time.time - start) + " | Speed: " + speed + " | Pos 1: " + movePos[0] + " | Pos 2: " + movePos[1] + " | Distance: " + (Vector3.Distance(movePos[0], movePos[1])));
+        return ((Time.time-start) * speed) / Vector3.Distance(movePos[0], movePos[1]);
+    }
+    public float MoveLERP(Vector3 init, Vector3 dest, float speed, float start)
+    {
+       // Debug.Log("Time: " + (Time.time - start) + " | Speed: " + speed + " | Pos 1: " + init + " | Pos 2: " + dest + " | Distance: " + (Vector3.Distance(init, dest)));
+        return ((Time.time - start) * speed) / Vector3.Distance(init, dest);
+    }
+
+    //Current unit Lookact Vector
+    public Quaternion MoveLook( Transform t, Vector3 target)
+    {
+        Vector3 relative = target - t.position;
+        Quaternion rot = Quaternion.LookRotation(relative);
+        return rot;
+    }
+
+    //Current unit world position
+    public Vector3 MovePos(List<Vector3> movePos, float f)
+    {
+        //Debug.Log("Init Pos: " + movePos[0] + " | Dst Pos: " + movePos[1] + " | FrameFrac: " + f);
+        return Vector3.Lerp(movePos[0], movePos[1], f);
+    }
+
+
+
 	//Get Move Vector
 	public Vector3 MoveDir( Vector3 forward, float speed, float t){
 		return forward * speed * t;
 	}
+    public Vector3 MoveVec(Vector3 initPos,Vector3 dstPos, float speed, float startTime, float t)
+    {
+        //confirm speed > 0
+        if (speed > 0)
+        {
+            //get distance between points
+            float dist = Vector3.Distance(initPos, dstPos);
+
+            //get Frame speed
+            float frameSpeed = (t - startTime) * speed;
+
+            //get completion fraction
+            float frameFrac = frameSpeed / dist;
+
+            //return LERP
+           // Debug.Log("Init Pos: " + initPos + " | Dst Pos: " + dstPos + " | FrameFrac: " + frameFrac);
+            return Vector3.Lerp(initPos, dstPos, frameFrac);
+        }
+        //return if speed is <= 0
+        return new Vector3();
+    }
 
 
 	//Create Sight Plane
@@ -117,4 +167,84 @@ public class UnitMath{
 		return Mathf.Clamp01 ((Speed * 0.1f) * (tileCost * 0.1f));
 	}
 
+
+    //Update HP
+    public int UpdateHP(int currentHP, int currentMax, int newMax)
+    {
+        //check if Hp is full
+        if(currentHP >= currentMax)
+        {
+            return newMax;
+        }
+        else
+        {
+            //Find hp ratio, return floored HP, with min of 1
+            float hp = newMax * (currentHP / currentMax);
+            return (hp >= 1) ? Mathf.FloorToInt(hp) : 1;
+        }        
+    }
+
+    //Check if target is in range
+    public bool InRange(Vector3 v1, Vector2 v2, int Range, int tileSize)
+    {
+        //return if distance between points is les than max range
+        return (Vector3.Distance(v1, v2) <= tileSize * Range);
+    }
+
+    //Get attacks per second
+    public float AttacksPerSecond(float Speed, int MaxSpeed)
+    {
+        //Tiem between attacks
+        return Mathf.Abs((Speed - MaxSpeed) * 0.25f);
+    }
+
+    //Attack Power
+    public float AttackPower(int numUnits, float attack)
+    {
+        //attack based on the number of living units
+        return numUnits * attack;
+    }
+
+    //Structure Flaw
+    public float StructureFlaw(float structureFlaw)
+    {
+        //roll random against flaw, if success mul by 10 and return, else return 1
+        return (Random.Range(0f, 1f) < structureFlaw) ? structureFlaw * 10 : 1;
+    }
+
+    //Minimum Damage return
+    private int MinDamage(int dmg)
+    {
+        //return a minimum of 1 damage
+        return (dmg >= 1) ? dmg : 1;
+    }
+
+    //Damge to Keep
+    public int KeepDamage(Unit u, Unit e)
+    {
+        //Keep damage is the rounded value of (( attack * siegeMod * siegeResist) - Defense) / structureflaw
+        return MinDamage(Mathf.RoundToInt(((AttackPower(u.CurrentStats().numUnits, u.CurrentStats().attack) * u.CurrentStats().siegeMod * e.CurrentStats().siegeMod) - e.CurrentStats().defense) / StructureFlaw(e.CurrentStats().evade)));
+    }
+
+    //Damage to Building
+    public int BuildingDamage(Unit u, Unit e)
+    {
+        //Building Damage is the rounded value of ( attack * siegeMod * siegeResist) / structureflaw
+        return MinDamage(Mathf.RoundToInt((AttackPower(u.CurrentStats().numUnits, u.CurrentStats().attack) * u.CurrentStats().siegeMod * e.CurrentStats().siegeMod) / StructureFlaw(e.CurrentStats().evade)));
+    }
+
+    //Damage to Units
+    public int UnitDamage(Unit u, Unit e)
+    {
+        //unit damage is the rounded value of Attack - Defense
+        return MinDamage(Mathf.RoundToInt(AttackPower(u.CurrentStats().numUnits, u.CurrentStats().attack) - e.CurrentStats().defense));
+    }
+
+    //Damage from traps
+    public int TrapDamage(Unit u, Unit e)
+    {
+        //trap takes damage then applys damage
+        --u.CurrentStats().HP;
+        return (int)u.CurrentStats().attack;
+    }
 }
