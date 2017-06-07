@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 796aa35a7a901a94dac55d2053df1310
+timeCreated: 1487044073
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - cullMask: {fileID: 4800000, guid: 9b7710ec3255ccf428ba67d969ca43e3, type: 3}
+  - outlineShader: {fileID: 4800000, guid: 8fb9e5adf83e4a84089843c0ecea12f1, type: 3}
+  - ISOCam: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
