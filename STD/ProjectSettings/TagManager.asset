@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Plains
+  - Desert
+  - Swamp
+  - Forest
+  - Hills
+  - River
+  - Mountain
+  - Sea
+  - Events
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Selectable
+  - 
+  - 
+  - Unit
+  - Visible_Tile
+  - Visited_Tile
+  - Hidden_Tile
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Ignore_Lighting
+  - Outline_Ignore
+  - Outline_Player
+  - Outline_Enemy
+  - Outline_Select
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

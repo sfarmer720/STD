@@ -1,0 +1,776 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1039246057336328}
+  m_IsPrefabParent: 1
+--- !u!1 &1032532087519370
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4009265339193276}
+  - component: {fileID: 114538099760747766}
+  m_Layer: 0
+  m_Name: Keep Upgrades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1039246057336328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4162882201382336}
+  m_Layer: 0
+  m_Name: Upgrade Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1197949815232174
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4418073300858638}
+  - component: {fileID: 114881338192233642}
+  m_Layer: 0
+  m_Name: Cavalry Upgrades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1392825266695082
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4397725001328474}
+  - component: {fileID: 114844394649285198}
+  m_Layer: 0
+  m_Name: Wall Upgrades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1450682822101104
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4967323533122258}
+  - component: {fileID: 114934830896773148}
+  m_Layer: 0
+  m_Name: Tower Upgrades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1461426732498814
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4949215099331156}
+  - component: {fileID: 114987988729258090}
+  m_Layer: 0
+  m_Name: Infantry Upgrades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1491879493802258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4722186915444152}
+  m_Layer: 0
+  m_Name: General
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1575736968748274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4374369177260778}
+  m_Layer: 0
+  m_Name: Defense
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1621813718482032
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4133495709800130}
+  - component: {fileID: 114209686197272674}
+  m_Layer: 0
+  m_Name: Camp Upgrades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1678294911308872
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4202793825637178}
+  - component: {fileID: 114061638167099134}
+  m_Layer: 0
+  m_Name: Gate Upgrades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1764787690159332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4847203586589754}
+  m_Layer: 0
+  m_Name: Offense
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1786326756284442
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4796948638741168}
+  - component: {fileID: 114256252793380072}
+  m_Layer: 0
+  m_Name: Scout Upgrades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1814892365021992
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4116845162690274}
+  - component: {fileID: 114790999873946300}
+  m_Layer: 0
+  m_Name: Archer Upgrades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1870279189542204
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4405046169513824}
+  - component: {fileID: 114490420313770632}
+  m_Layer: 0
+  m_Name: Siege Upgrades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4009265339193276
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1032532087519370}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4374369177260778}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4116845162690274
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1814892365021992}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4847203586589754}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4133495709800130
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1621813718482032}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4847203586589754}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4162882201382336
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1039246057336328}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 519.7985, y: 227.60184, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4847203586589754}
+  - {fileID: 4374369177260778}
+  - {fileID: 4722186915444152}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4202793825637178
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1678294911308872}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4374369177260778}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4374369177260778
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1575736968748274}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4009265339193276}
+  - {fileID: 4397725001328474}
+  - {fileID: 4202793825637178}
+  - {fileID: 4967323533122258}
+  m_Father: {fileID: 4162882201382336}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4397725001328474
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1392825266695082}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4374369177260778}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4405046169513824
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1870279189542204}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4847203586589754}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4418073300858638
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1197949815232174}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4847203586589754}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4722186915444152
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1491879493802258}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4162882201382336}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4796948638741168
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1786326756284442}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4847203586589754}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4847203586589754
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1764787690159332}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4796948638741168}
+  - {fileID: 4133495709800130}
+  - {fileID: 4949215099331156}
+  - {fileID: 4116845162690274}
+  - {fileID: 4418073300858638}
+  - {fileID: 4405046169513824}
+  m_Father: {fileID: 4162882201382336}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4949215099331156
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1461426732498814}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4847203586589754}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4967323533122258
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1450682822101104}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4374369177260778}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114061638167099134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1678294911308872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dccc54cc773fca4ba4a026e34bd1fe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateRef: {fileID: 0}
+  unitID: {x: -1, y: -1, z: -1}
+  defaultImage1: {fileID: 21300000, guid: a8bd686b91a0788459dbcac94b73c3e9, type: 3}
+  defaultImage2: {fileID: 21300000, guid: bc29ba81648146e4fbed2677cfdce775, type: 3}
+  upgradeIcon: {fileID: 0}
+  commandIcon: {fileID: 0}
+  hireIcon: {fileID: 0}
+  midUpgradeImages: []
+  midUpgradeSelected: []
+  midCommandImages: []
+  midCommandSelected: []
+  midHireImages: []
+  midHireSelected: []
+  low1Images: []
+  low1SelectionImages: []
+  low2Images: []
+  low2SelectionImages: []
+  low3Images: []
+  low3SelectionImages: []
+  low4Images: []
+  low4SelectionImages: []
+  low5Images: []
+  low5SelectionImages: []
+  low6Images: []
+  low6SelectionImages: []
+--- !u!114 &114209686197272674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1621813718482032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64ce6acc053184458ec881c45d4d4c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateRef: {fileID: 0}
+  unitID: {x: 0, y: 1, z: 0}
+  defaultImage1: {fileID: 21300000, guid: a8bd686b91a0788459dbcac94b73c3e9, type: 3}
+  defaultImage2: {fileID: 21300000, guid: bc29ba81648146e4fbed2677cfdce775, type: 3}
+  upgradeIcon: {fileID: 0}
+  commandIcon: {fileID: 0}
+  hireIcon: {fileID: 0}
+  midUpgradeImages: []
+  midUpgradeSelected: []
+  midCommandImages: []
+  midCommandSelected: []
+  midHireImages: []
+  midHireSelected: []
+  low1Images: []
+  low1SelectionImages: []
+  low2Images: []
+  low2SelectionImages: []
+  low3Images: []
+  low3SelectionImages: []
+  low4Images: []
+  low4SelectionImages: []
+  low5Images: []
+  low5SelectionImages: []
+  low6Images: []
+  low6SelectionImages: []
+--- !u!114 &114256252793380072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1786326756284442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02061c4812ddb084d90e7ed2be7c630f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateRef: {fileID: 0}
+  unitID: {x: 0, y: 0, z: 0}
+  defaultImage1: {fileID: 21300000, guid: a8bd686b91a0788459dbcac94b73c3e9, type: 3}
+  defaultImage2: {fileID: 21300000, guid: bc29ba81648146e4fbed2677cfdce775, type: 3}
+  upgradeIcon: {fileID: 0}
+  commandIcon: {fileID: 0}
+  hireIcon: {fileID: 0}
+  midUpgradeImages: []
+  midUpgradeSelected: []
+  midCommandImages: []
+  midCommandSelected: []
+  midHireImages: []
+  midHireSelected: []
+  low1Images: []
+  low1SelectionImages: []
+  low2Images: []
+  low2SelectionImages: []
+  low3Images: []
+  low3SelectionImages: []
+  low4Images: []
+  low4SelectionImages: []
+  low5Images: []
+  low5SelectionImages: []
+  low6Images: []
+  low6SelectionImages: []
+--- !u!114 &114490420313770632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1870279189542204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e41b4d145e29e74ea775b40f8357130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateRef: {fileID: 0}
+  unitID: {x: -1, y: -1, z: -1}
+  defaultImage1: {fileID: 21300000, guid: a8bd686b91a0788459dbcac94b73c3e9, type: 3}
+  defaultImage2: {fileID: 21300000, guid: bc29ba81648146e4fbed2677cfdce775, type: 3}
+  upgradeIcon: {fileID: 0}
+  commandIcon: {fileID: 0}
+  hireIcon: {fileID: 0}
+  midUpgradeImages: []
+  midUpgradeSelected: []
+  midCommandImages: []
+  midCommandSelected: []
+  midHireImages: []
+  midHireSelected: []
+  low1Images: []
+  low1SelectionImages: []
+  low2Images: []
+  low2SelectionImages: []
+  low3Images: []
+  low3SelectionImages: []
+  low4Images: []
+  low4SelectionImages: []
+  low5Images: []
+  low5SelectionImages: []
+  low6Images: []
+  low6SelectionImages: []
+--- !u!114 &114538099760747766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1032532087519370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acb41e2a22fcb344294aafa216cc74be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stdMath: {fileID: 0}
+  overlord: {fileID: 0}
+  unit: {fileID: 0}
+  numUnitUpgrades: 0
+  numClassUpgrades: 0
+  unitUpgradeCosts: 
+  classUpgradeCosts: 
+  defaultImage1: {fileID: 21300000, guid: a8bd686b91a0788459dbcac94b73c3e9, type: 3}
+  defaultImage2: {fileID: 21300000, guid: bc29ba81648146e4fbed2677cfdce775, type: 3}
+  mainImage: {fileID: 0}
+  classImages: []
+  classUpgradeImages: []
+  UnitUpgradeImages: []
+--- !u!114 &114790999873946300
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1814892365021992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6ebb65fbc14fbb47ad254aa468caa4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateRef: {fileID: 0}
+  unitID: {x: -1, y: -1, z: -1}
+  defaultImage1: {fileID: 21300000, guid: a8bd686b91a0788459dbcac94b73c3e9, type: 3}
+  defaultImage2: {fileID: 21300000, guid: bc29ba81648146e4fbed2677cfdce775, type: 3}
+  upgradeIcon: {fileID: 0}
+  commandIcon: {fileID: 0}
+  hireIcon: {fileID: 0}
+  midUpgradeImages: []
+  midUpgradeSelected: []
+  midCommandImages: []
+  midCommandSelected: []
+  midHireImages: []
+  midHireSelected: []
+  low1Images: []
+  low1SelectionImages: []
+  low2Images: []
+  low2SelectionImages: []
+  low3Images: []
+  low3SelectionImages: []
+  low4Images: []
+  low4SelectionImages: []
+  low5Images: []
+  low5SelectionImages: []
+  low6Images: []
+  low6SelectionImages: []
+--- !u!114 &114844394649285198
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1392825266695082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a8fc7e5abea2f42846f3005a94db05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateRef: {fileID: 0}
+  unitID: {x: -1, y: -1, z: -1}
+  defaultImage1: {fileID: 21300000, guid: a8bd686b91a0788459dbcac94b73c3e9, type: 3}
+  defaultImage2: {fileID: 21300000, guid: bc29ba81648146e4fbed2677cfdce775, type: 3}
+  upgradeIcon: {fileID: 0}
+  commandIcon: {fileID: 0}
+  hireIcon: {fileID: 0}
+  midUpgradeImages: []
+  midUpgradeSelected: []
+  midCommandImages: []
+  midCommandSelected: []
+  midHireImages: []
+  midHireSelected: []
+  low1Images: []
+  low1SelectionImages: []
+  low2Images: []
+  low2SelectionImages: []
+  low3Images: []
+  low3SelectionImages: []
+  low4Images: []
+  low4SelectionImages: []
+  low5Images: []
+  low5SelectionImages: []
+  low6Images: []
+  low6SelectionImages: []
+--- !u!114 &114881338192233642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1197949815232174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e2d7a31ae02374abd71d66f0a0c213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateRef: {fileID: 0}
+  unitID: {x: -1, y: -1, z: -1}
+  defaultImage1: {fileID: 21300000, guid: a8bd686b91a0788459dbcac94b73c3e9, type: 3}
+  defaultImage2: {fileID: 21300000, guid: bc29ba81648146e4fbed2677cfdce775, type: 3}
+  upgradeIcon: {fileID: 0}
+  commandIcon: {fileID: 0}
+  hireIcon: {fileID: 0}
+  midUpgradeImages: []
+  midUpgradeSelected: []
+  midCommandImages: []
+  midCommandSelected: []
+  midHireImages: []
+  midHireSelected: []
+  low1Images: []
+  low1SelectionImages: []
+  low2Images: []
+  low2SelectionImages: []
+  low3Images: []
+  low3SelectionImages: []
+  low4Images: []
+  low4SelectionImages: []
+  low5Images: []
+  low5SelectionImages: []
+  low6Images: []
+  low6SelectionImages: []
+--- !u!114 &114934830896773148
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1450682822101104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca360a3da62ede7408d64e115f4b7793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateRef: {fileID: 0}
+  unitID: {x: -1, y: -1, z: -1}
+  defaultImage1: {fileID: 21300000, guid: a8bd686b91a0788459dbcac94b73c3e9, type: 3}
+  defaultImage2: {fileID: 21300000, guid: bc29ba81648146e4fbed2677cfdce775, type: 3}
+  upgradeIcon: {fileID: 0}
+  commandIcon: {fileID: 0}
+  hireIcon: {fileID: 0}
+  midUpgradeImages: []
+  midUpgradeSelected: []
+  midCommandImages: []
+  midCommandSelected: []
+  midHireImages: []
+  midHireSelected: []
+  low1Images: []
+  low1SelectionImages: []
+  low2Images: []
+  low2SelectionImages: []
+  low3Images: []
+  low3SelectionImages: []
+  low4Images: []
+  low4SelectionImages: []
+  low5Images: []
+  low5SelectionImages: []
+  low6Images: []
+  low6SelectionImages: []
+--- !u!114 &114987988729258090
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1461426732498814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 533d697e9367e354989c2a79d7157fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateRef: {fileID: 0}
+  unitID: {x: -1, y: -1, z: -1}
+  defaultImage1: {fileID: 21300000, guid: a8bd686b91a0788459dbcac94b73c3e9, type: 3}
+  defaultImage2: {fileID: 21300000, guid: bc29ba81648146e4fbed2677cfdce775, type: 3}
+  upgradeIcon: {fileID: 0}
+  commandIcon: {fileID: 0}
+  hireIcon: {fileID: 0}
+  midUpgradeImages: []
+  midUpgradeSelected: []
+  midCommandImages: []
+  midCommandSelected: []
+  midHireImages: []
+  midHireSelected: []
+  low1Images: []
+  low1SelectionImages: []
+  low2Images: []
+  low2SelectionImages: []
+  low3Images: []
+  low3SelectionImages: []
+  low4Images: []
+  low4SelectionImages: []
+  low5Images: []
+  low5SelectionImages: []
+  low6Images: []
+  low6SelectionImages: []

@@ -85,6 +85,14 @@ public class UnitCombat : MonoBehaviour
         }
     }
 
+	//Attempt to attack a tile
+	public void AttackTile(){
+		//check if the unit is ranged
+		if(unit.BaseStats().isRanged){
+		
+		}
+	}
+
     //Target Enemy
     public void TargetEnemy(Unit e)
     {
